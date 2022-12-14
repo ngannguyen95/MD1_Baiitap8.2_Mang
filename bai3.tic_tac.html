@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        input {
+            width: 25px;
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+<table border="1">
+    <script>
+        for (let i = 0; i < 3; i++) {
+            document.write('<tr>')
+            for (let j = 0; j < 3; j++) {
+                document.write(`<td><input id="${i*3+j+1}" onclick="autoTick(${i*3+j+1})"  type="text" readonly></td>`)
+            }
+            document.write('</tr>')
+        }
+    </script>
+</table>
+<script>
+    let turn = 1;
+    function checkWin() {
+        let value =[]
+        let arr= document.getElementsByTagName('input')//gọi ra tên thẻ
+        for (let i = 0; i < arr.length; i++) {
+            value.push(arr[i].value);
+        }
+        console.log(value)
+       let con1 =value[0] && value[0]==value[1] && value[2]==value[1]
+       let con2 =value[0] && value[0]==value[4] && value[0]==value[8]
+       let con3 =value[0] && value[0]==value[3] && value[3]==value[6]
+       let con4 =value[1] && value[1]==value[4] && value[4]==value[7]
+       let con5 =value[2] && value[2]==value[4] && value[2]==value[6]
+       let con6 =value[2] && value[2]==value[5] && value[2]==value[8]
+       let con7 =value[3] && value[3]==value[5] && value[3]==value[4]
+       let con8 =value[6] && value[6]==value[7] && value[7]==value[8]
+        if(con1||con2||con3){
+            alert(value[0] +" win")
+        }else if (con4||con5||con7){
+            alert(value[4] +" win")
+        }else  if (con6||con8){
+            alert(value[8] +" win")
+        }
+        if (turn > 9){
+            alert("Khong ai win")
+        }
+    }
+
+    function autoTick(index) {
+        if (turn<=9){
+            if(turn%2 ==0){
+                document.getElementById(`${index}`).value = 'O';
+
+            }else {
+                document.getElementById(`${index}`).value = 'X';
+            }
+        }
+        turn++;
+        checkWin()
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Từ điển Anh Việt</h1>
+<form onsubmit="event.preventDefault()">
+    <Lable>Tiếng Anh <input  id="tiengAnh" type="text" autofocus>
+    </Lable>
+    <lable>
+        Tiếng Việt <input id="tiengViet" type="text" readonly>
+    </lable>
+    <button type="submit" onclick="kiemTra()">Kết quả</button>
+</form>
+
+<script>
+let listEnglish= ['red','blue','violet','orange','yellow'];
+let listVietnamese= ['đỏ','xanh','tím','cam','vàng'];
+
+function kiemTra() {
+    // document.getElementById('tiengViet').value="";
+    let nhapVaoE = document.getElementById('tiengAnh').value;
+    let check = false
+    for (let i = 0; i < listEnglish.length; i++) {
+    if (listEnglish[i]==nhapVaoE){
+        document.getElementById('tiengViet').value= listVietnamese[i];
+        check= true
+        break;
+    }
+
+    }
+}
+</script>
+</body>
+</html>

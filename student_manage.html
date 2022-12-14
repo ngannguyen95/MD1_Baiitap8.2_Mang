@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        td {
+            text-align: center;
+        }
+
+        button {
+            color: white;
+            border: 1px solid;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div style="text-align: center">
+    <lablel id="validate" style="color: red"></lablel>
+    <br><br>
+    <input id="newStudent" type="text">
+    <button style="background-color: green" onclick="creatStudent()">Create</button>
+    <br><br>
+    <input id="search" oninput="actionSearch()" type="text">Seach
+<!--    <button style="background-color: blue" onclick="actionSeach()">Search</button>-->
+</div>
+
+<table border="1" style="width: 100%">
+    <caption style="color: blue; font-weight: bold">STUDENT MANAGE</caption>
+    <tr>
+        <th>STT</th>
+        <th>NAME</th>
+        <th>EDIT</th>
+        <th>DELETE</th>
+    </tr>
+    <tbody id="drawTable"></tbody>
+</table>
+<script>
+    let listStudent = ['Ngân', 'Mến'];
+
+    function showListStudent(arr) {
+        let drawTable = '';
+        for (let i = 0; i < arr.length; i++) {
+            //cách 1 cọng chỗi thông thừờng
+            // drawTable += '<tr>' +
+            //     '<td>' + (i + 1) + '</td>' +
+            //     '<td>' + listStudent[i] + '</td>' +
+            //     '</tr>'
+            //cách 2 dùng string  template
+            drawTable += `<tr>
+                               <td>${i + 1}</td>
+                                <td>${arr[i]}</td>
+                                <td><button style="background-color: yellow" onclick="updateStudent(${i})">Edit</button></td>
+                                 <td><button style="background-color: red" onclick="deleteStudent(${i})">Delete</button></td>
+                          </tr>`
+        }
+        document.getElementById('drawTable').innerHTML = drawTable;
+    }
+
+    showListStudent(listStudent);
+
+    function creatStudent() {
+        let newStudent = document.getElementById('newStudent').value;
+        if (newStudent.trim() === '') {
+            document.getElementById('validate').innerHTML = 'Tên đăng nhập không đúng. Vui lòng nhập lại'
+        } else {
+            document.getElementById('validate').innerHTML = '<lable style="color: blue">' + 'Create stuent sacess' + '</lable>'
+            listStudent.push(newStudent);
+            showListStudent(listStudent);
+        }
+    }
+
+    function updateStudent(index) {
+        let updateStudent = prompt('Enter the name to update--->' + listStudent[index]);
+        if (updateStudent.trim() === '') {
+            document.getElementById('validate').innerHTML = 'Tên đăng nhập không đúng. Vui lòng nhập lại'
+        } else {
+            if (updateStudent === listStudent[index]) {
+                document.getElementById('validate').innerHTML = 'Tên bạn nhập đã trùng với tên cũ. Vui lòng nhập lại';
+            } else {
+                listStudent[index] = updateStudent;
+                showListStudent(listStudent);
+            }
+        }
+
+    }
+
+    function deleteStudent(index) {
+        // console.log(listStudent.splice(index,1))
+        if (confirm('Bạn chắc chắn muốn xóa?')) {
+            document.getElementById('validate').innerHTML = listStudent.splice(index, 1)//lấy đi index sau vị trí 1 trong mảng
+        }
+        showListStudent(listStudent);
+
+    }
+
+    function actionSearch() {
+        let arrSearch=[]
+        let search = document.getElementById('search').value.toLowerCase()
+        for (let i = 0; i < listStudent.length; i++) {
+            if (listStudent[i].toLowerCase().includes(search)){
+                arrSearch.push(listStudent[i]);
+            }
+        }
+        showListStudent(arrSearch)
+    }
+</script>
+</body>
+</html>

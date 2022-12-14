@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let chuoi = prompt('Nhập vào dãy chữ: ');
+    let chuHoa = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let chuThuong = 'abcdefghijklmnopqrstuvwxyz';
+    let ketQua = [];
+    document.write("Chuỗi nhập vào: " + chuoi + '<br>');
+    for (let i = 0; i < chuoi.length; i++) {
+        if (chuHoa.indexOf(chuoi[i]) !== -1) {
+            ketQua.push(chuoi[i].toLowerCase());
+        } else if (chuThuong.indexOf(chuoi[i]) !== -1) {
+            ketQua.push(chuoi[i].toUpperCase());
+        } else {
+            ketQua.push(chuoi[i]);
+        }
+    }
+    document.write("Chuỗi xử lí: " + ketQua.join(""));
+
+</script>
+</body>
+</html>
